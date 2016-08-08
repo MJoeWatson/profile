@@ -2,8 +2,11 @@
 #
 #
 class profile::go (
+  $version = latest,
 ){
-  
-    include ::go
+
+  package { 'golang':
+      ensure  => $version,
+  }
 
 }
