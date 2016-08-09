@@ -11,11 +11,14 @@ class profile::go (
       ensure  => $version,
   }
   Class['common::files'] ->
+  exec { 'export go workplace':
+    command => 'export GOPATH=$HOME/gocode',
+  } ->
   exec { 'install go code':
-    command => '( cd $HOME/gocode/src/basic/ && go install)',
+    command => 'cd $HOME/gocode/src/basic/ && go install',
   } ->
   exec { 'run go code':
-    command => '$HOME/gocode/src/basic/basic',
+    command => '$HOME/gocode/bin/basic',
   }
 
 }
