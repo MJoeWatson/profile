@@ -20,3 +20,4 @@ class profile::go (
     environment => ["GOPATH=/root/gocode"],
     command     => '/root/gocode/bin/basic &',
   }
+}
