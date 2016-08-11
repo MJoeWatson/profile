@@ -3,7 +3,7 @@
 #
 class profile::nginx (
   $nginx_hosts   = {},
-  $nginx_service = stopped,
+  $nginx_service = running,
 ){
   class { '::nginx':
     service_ensure => $nginx_service,
