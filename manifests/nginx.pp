@@ -3,16 +3,19 @@
 #
 class profile::nginx (
   $nginx_hosts   = {},
-  $nginx_service = running,
+  $nginx_service = stopped,
+  $consul_template_service = stopped
 ){
 
   include ::consul
-  include ::consul_template
 
   Class['::consul'] ->
-  Class['::consul_template'] ->
   class { '::nginx':
     service_ensure => $nginx_service,
+  } ->
+  class { '::consul_template':
+    service_ensure => $consul_template_service,
+    notify         => Nginx::Service[$name],
   }
 
   if $nginx_hosts != undef {
