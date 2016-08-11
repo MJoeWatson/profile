@@ -1,0 +1,19 @@
+<%
+    template_vars = scope.lookupvar('template_vars')
+    service = template_vars['service']
+    listen_port = template_vars['listen_port']
+%>
+upstream <%= @title %> {
+  {{range service "<%= service %>" "any"}}
+  server {{.Address}}:{{.Port}};
+  {{else}}
+  server 127.0.0.1:1234;
+  {{end}}
+}
+
+<% if listen_port %>
+server {
+  listen *:<%= listen_port %>;
+  proxy_pass            <%= @title %>;
+}
+<% end %>
