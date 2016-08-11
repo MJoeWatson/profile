@@ -6,7 +6,9 @@ class profile::go (
 ){
 
   include common::files
+  include ::consul
 
+  #Install Golang Package
   package { 'golang':
       ensure  => $version,
   }
