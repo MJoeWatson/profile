@@ -4,7 +4,7 @@
 class profile::nginx (
   $nginx_hosts   = {},
   $nginx_service = stopped,
-  $consul_template_service = stopped
+  $consul_template_service = running
 ){
 
   include ::consul
