@@ -5,12 +5,15 @@ class profile::nginx (
   $nginx_hosts   = {},
   $nginx_service = running,
 ){
-  class { '::nginx':
-    service_ensure => $nginx_service,
-  }
 
   include ::consul
   include ::consul_template
+
+  Class['::consul'] ->
+  Class['::consul_template'] ->
+  class { '::nginx':
+    service_ensure => $nginx_service,
+  }
 
   if $nginx_hosts != undef {
     validate_hash($nginx_hosts)
