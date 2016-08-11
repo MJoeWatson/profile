@@ -14,7 +14,7 @@ class profile::nginx (
     create_resources(common::host,$nginx_hosts)
   }
 
-  $consul_template_watches = hiera_hash('consul_template::watches')
+  $consul_template_watches = hiera_hash('consul_templates::watches')
 
   if $consul_template_watches {
     create_resources('consul_template::watch', $consul_template_watches)
