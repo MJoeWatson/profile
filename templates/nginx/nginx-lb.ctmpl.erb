@@ -4,7 +4,7 @@
     listen_port = template_vars['listen_port']
 %>
 upstream <%= @title %> {
-  {{range service "<%= service %>" "any"}}
+  {{range service "<%= service %>" "passing"}}
   server {{.Address}}:{{.Port}};
   {{else}}
   server 127.0.0.1:1234;
